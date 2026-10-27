@@ -8,6 +8,7 @@ Certificate in Low-Code, No-Code & AI-Assisted Application Development
 This is my first web application created with the help of ChatGPT.
 
 The application uses Python and Flask to display a simple message in a web browser.
+AI tool used: ChatGPT. The initial Flask application code was generated with ChatGPT, reviewed and tested locally.
 
 ## Technologies Used
 
