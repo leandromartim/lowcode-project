@@ -1,0 +1,20 @@
+I have an existing Flask 3.x application with an app.py file.
+
+Generate a contact form for this application using Flask 3.x and Jinja2 templates.
+
+Requirements:
+- The form must be available at /contact.
+- Include name, email and message fields.
+- Validate all fields on the server, not only in the browser.
+- Reject empty name or message fields.
+- Reject invalid email addresses.
+- Display a visible error message when validation fails.
+- Show a confirmation page after a successful submission.
+- Do not store any data yet.
+- Do not use packages outside Flask and the Python standard library.
+
+Provide the complete code for each required file, including its file path.
+
+Do not add unrelated features.
+
+Explain how to run and test the application.
