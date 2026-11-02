@@ -60,3 +60,78 @@ I also found Claude's implementation easier to understand as a beginner.
 Using the same prompt with different AI tools can produce different code and results.
 
 I learned that AI-generated code should be tested and reviewed instead of being accepted without checking.
+
+
+## Evaluation Scores
+
+The scores below are based on my practical tests and code review. Each criterion is rated from 1 (poor) to 5 (excellent).
+
+| Criterion | Claude | Gemini |
+|---|---|---|
+| Correctness | 5/5 | 4/5 |
+| Code Quality | 5/5 | 4/5 |
+| Completeness | 5/5 | 4/5 |
+| Security | 3/5 | 2/5 |
+
+Claude performed better overall. Its code returned HTTP 400 for invalid form submissions and used a separate validation function.
+
+Gemini also produced a working form, but returned HTTP 200 for invalid data and used a hard-coded secret key.
+
+Neither solution included CSRF protection, so both would need security improvements before production use.
+## Original Prompts
+
+### Claude
+
+Full prompt: [Claude prompt](../experiments/week02/claude/prompt.txt)
+
+```text
+
+I have an existing Flask 3.x application with an app.py file.
+
+Generate a contact form for this application using Flask 3.x and Jinja2 templates.
+
+Requirements:
+- The form must be available at /contact.
+- Include name, email and message fields.
+- Validate all fields on the server, not only in the browser.
+- Reject empty name or message fields.
+- Reject invalid email addresses.
+- Display a visible error message when validation fails.
+- Show a confirmation page after a successful submission.
+- Do not store any data yet.
+- Do not use packages outside Flask and the Python standard library.
+
+Provide the complete code for each required file, including its file path.
+
+Do not add unrelated features.
+
+Explain how to run and test the application.
+```
+
+### Gemini
+
+Full prompt: [Gemini prompt](../experiments/week02/gemini/prompt.txt)
+
+```text
+
+I have an existing Flask 3.x application with an app.py file.
+
+Generate a contact form for this application using Flask 3.x and Jinja2 templates.
+
+Requirements:
+- The form must be available at /contact.
+- Include name, email and message fields.
+- Validate all fields on the server, not only in the browser.
+- Reject empty name or message fields.
+- Reject invalid email addresses.
+- Display a visible error message when validation fails.
+- Show a confirmation page after a successful submission.
+- Do not store any data yet.
+- Do not use packages outside Flask and the Python standard library.
+
+Provide the complete code for each required file, including its file path.
+
+Do not add unrelated features.
+
+Explain how to run and test the application.
+```
