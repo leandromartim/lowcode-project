@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block title %}New task{% endblock %}
+
+{% block content %}
+  <h1>New task</h1>
+
+  <form method="post" action="{{ url_for('task_create') }}" novalidate>
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" maxlength="200"
+             value="{{ form.get('title', '') }}">
+      {% if errors.get('title') %}<p class="error">{{ errors['title'] }}</p>{% endif %}
+    </div>
+
+    <div class="field">
+      <label for="description">Description (optional)</label>
+      <textarea id="description" name="description" rows="5">{{ form.get('description', '') }}</textarea>
+    </div>
+
+    <div class="field">
+      <label for="due_date">Due date (optional)</label>
+      <input type="date" id="due_date" name="due_date"
+             value="{{ form.get('due_date', '') }}">
+      {% if errors.get('due_date') %}<p class="error">{{ errors['due_date'] }}</p>{% endif %}
+    </div>
+
+    <button type="submit">Create task</button>
+    <a href="{{ url_for('task_list') }}">Cancel</a>
+  </form>
+{% endblock %}
