@@ -16,7 +16,24 @@
 
 ## What I fixed, and why
 
-No changes have been made yet. The initial AI-generated version was committed before starting this review.
+
+## What I fixed, and why
+
+### Fix 1 — Contact page navigation
+Commit: 596f63a
+
+During manual testing, I noticed that the Contact page did not have navigation links to the main application.
+
+I added links to Tasks, New task and Contact in templates/contact.html. I tested the navigation in Chrome and confirmed that it works.
+
+### Fix 2 — Flask Debug Mode
+Commit: 059e9ff
+
+During the code review, I identified that Flask Debug Mode was enabled.
+
+I changed debug=True to debug=False in app.py to reduce the risk of exposing debugging information. I restarted the application and confirmed that the terminal displayed "Debug mode: off".
+
+Both issues were identified through manual verification rather than Gemini's original findings.
 
 ## What I am knowingly leaving, and why
 
