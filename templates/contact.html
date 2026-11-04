@@ -16,6 +16,12 @@
   </style>
 </head>
 <body>
+<nav aria-label="Main navigation">
+  <a href="{{ url_for('task_list') }}">Tasks</a>
+  <a href="{{ url_for('task_new') }}">New task</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+</nav>
+
   <h1>Contact us</h1>
 
   {% if errors %}
