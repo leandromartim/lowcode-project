@@ -65,6 +65,8 @@ The automation was tested using fictional case data.
 
 ### Screenshots
 
+![Make.com workflow — four modules](img/automation-01-workflow.png)
+
 ![High priority test](img/automation-01-high.png)
 
 ![Low priority test](img/automation-01-low.png)
@@ -72,3 +74,60 @@ The automation was tested using fictional case data.
 ![Generated report](img/automation-01-report.png)
 
 ![Google Sheets successful integration](img/automation-01-sheets.png)
+
+## Prompt Strategy
+
+**AI assistant used:** ChatGPT
+
+### AI-Assisted Development
+
+ChatGPT was used to support the development of the Flask webhook handler `/hooks/prioritise`.
+
+The development took place through an ongoing conversation, where the existing Flask application and the business requirements had already been discussed.
+
+The assistant generated Python code to receive fictional case data in JSON format, validate the required fields and calculate priorities based on business rules.
+
+Two original follow-up prompts used during the implementation were:
+
+**Prompt 1 (verbatim):**
+
+> como vai ficar
+
+**Prompt 2 (verbatim):**
+
+> eu to perdido, o que eu tenho que colar, onde especificamente? ta aqui o screenshot - fala em numero de linha
+
+These prompts were part of the original development conversation and relied on the technical context already provided.
+
+### AI-Assisted Code Review
+
+After implementing and testing the endpoint, I used ChatGPT to review the code and identify possible limitations.
+
+**Code Review Prompt (verbatim):**
+
+> Review the existing Flask endpoint `/hooks/prioritise` in my application.
+>
+> The endpoint receives fictional business case data in JSON format and classifies priorities based on manager requests, opportunity close dates and new replies.
+>
+> Check the input validation, HTTP response codes and priority rules. Identify any limitations or errors without adding unnecessary features.
+>
+> Use Python 3.13 and Flask. Keep the existing application functionality unchanged and explain the findings in simple English.
+
+### How the AI Output Was Verified
+
+The Flask code was checked using `python -m py_compile app.py`. The syntax check completed without errors.
+
+The application was then started locally and tested using HTTP requests with `curl`.
+
+**Confirmed test results:**
+
+- Valid fictional case (SIM-001): HTTP 200 OK, with High priority.
+- Incomplete JSON (SIM-002): HTTP 400 Bad Request, with the message "Missing required fields".
+
+The AI code review also identified limitations in the current implementation, including missing case-age ordering, limited handling of upcoming deadlines and no duplicate detection.
+
+The endpoint was kept unchanged because the additional functionality was not required for the current practical exercise.
+
+The Make.com automation was developed and tested separately. It successfully classified fictional cases and recorded the results in Google Sheets.
+
+The Flask endpoint is not directly connected to the Make.com workflow.
