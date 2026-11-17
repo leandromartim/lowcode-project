@@ -213,6 +213,61 @@ def contact():
 def contact_thanks():
     return render_template("contact_thanks.html")
 
+# ---------- Week 4: Case Prioritisation Webhook ----------
+
+@app.route("/hooks/prioritise", methods=["POST"])
+def prioritise_case():
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return {"error": "Invalid JSON data"}, 400
+
+    required_fields = (
+        "case_number",
+        "creation_date",
+        "opportunity_close_date",
+        "manager_priority",
+        "new_reply",
+        "quote_status",
+    )
+
+    if any(field not in data for field in required_fields):
+        return {"error": "Missing required fields"}, 400
+
+    if (
+        not isinstance(data["case_number"], str)
+        or not data["case_number"].strip()
+        or type(data["manager_priority"]) is not bool
+        or type(data["new_reply"]) is not bool
+        or data["quote_status"] not in ("open", "converted")
+    ):
+        return {"error": "Invalid field values"}, 400
+
+    try:
+        creation_date = date.fromisoformat(data["creation_date"])
+        close_date = date.fromisoformat(data["opportunity_close_date"])
+    except (TypeError, ValueError):
+        return {"error": "Invalid date format"}, 400
+
+    if data["manager_priority"]:
+        priority = "High"
+        reason = "Manager priority request"
+    elif close_date <= date.today() and data["quote_status"] == "open":
+        priority = "High"
+        reason = "Opportunity closing with an open quote"
+    elif data["new_reply"]:
+        priority = "Medium"
+        reason = "New customer reply"
+    else:
+        priority = "Low"
+        reason = "No urgent action identified"
+
+    return {
+        "case_number": data["case_number"],
+        "priority": priority,
+        "reason": reason,
+    }, 200
+
 
 if __name__ == "__main__":
     app.run(debug=False)
